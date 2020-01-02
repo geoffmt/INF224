@@ -51,6 +51,7 @@ public:
 	
 	~Film() {
 		delete [] chapterLengths;
+		std::cout << "Film " << getName() << " deleted\n\n";
 	}
 	
 	const int * getChapterLengths() const {

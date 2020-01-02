@@ -24,7 +24,9 @@ public:
 	Multimedia();
 	Multimedia(string name, string pathname);
 	
-	virtual ~Multimedia(){} //destructeur
+	virtual ~Multimedia(){
+		std::cout << "Media " << getName() << " deleted\n\n";
+	} //destructeur
 	
 	string getName() const;
 	string getPathname() const;

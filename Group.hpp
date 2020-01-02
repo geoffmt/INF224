@@ -28,7 +28,9 @@ public:
 	
 	std::string getGroupName() const {return groupName;};
 	
-	~Group(){};
+	~Group(){
+		std::cout << "Group " << getGroupName() << " deleted\n\n";
+	};
 	
 	void displayMedia(std::ostream& f) const{
 		f << "Group name : " << groupName << std::endl;
