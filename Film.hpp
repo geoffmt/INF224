@@ -49,7 +49,9 @@ public:
 		copyLengths(chapterLengths, numberOfChapters);
 	}
 	
-	~Film() {	}
+	~Film() {
+		delete [] chapterLengths;
+	}
 	
 	const int * getChapterLengths() const {
 		return chapterLengths;
