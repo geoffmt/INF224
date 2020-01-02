@@ -10,6 +10,8 @@ using namespace std;
 #include "Multimedia.hpp"
 #include "Video.hpp"
 #include "Picture.hpp"
+#include "Film.hpp"
+#include "Group.hpp"
 
 
 int main(int argc, const char* argv[])
