@@ -30,9 +30,15 @@ public:
 	int getLength() const {return length;};
 	
 	void setLength(int newLength){this->length = newLength;};
+	
+	virtual void displayMedia(std::ostream& f) const override {
+		f << "Name : " << getName() << ", "
+		<< "Path : " << getPathname() << ", "
+		<< "Length : " << getLength() << ", " << std::endl;
+	};
 
-	void playMedia() const override {
-		string cmd = "mpv " + this->getPathname() + this->getName() + "&";
+	virtual void playMedia() const override {
+		string cmd = "mpv " + this->getPathname()  + "&";
 		system(cmd.c_str());
 	};
 	

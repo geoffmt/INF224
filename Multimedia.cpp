@@ -21,7 +21,7 @@ string Multimedia::getPathname() const {return pathname;};
 void Multimedia::setType(string newName){name = newName;};
 void Multimedia::setPathname(string newPathname){pathname = newPathname;};
 
-void Multimedia::displayMultimedia (std::ostream & f){
-	f << name << pathname;
+void Multimedia::displayMedia (std::ostream & f) const {
+	f << "Name : " << getName() << ", "
+	<< "Path : " << getPathname() << std::endl;
 };
-

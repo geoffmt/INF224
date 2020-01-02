@@ -32,8 +32,14 @@ public:
 	void setType(string newName);
 	void setPathname(string newPathname);
 	
-	void displayMultimedia (std::ostream & f);
+	/*
+	 Affiche les attributs du média
+	 */
+	virtual void displayMedia (std::ostream&) const;
 	
+	/*
+	 Joue le média
+	 */
 	virtual void playMedia() const {}
 	
 };

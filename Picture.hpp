@@ -36,6 +36,13 @@ public:
 	void setLatitude(int newLatitude){this->latitude = newLatitude;};
 	void setLongitude(int newLongitude){this->longitude = newLongitude;};
 	
+	void displayMedia(std::ostream& f) const override {
+			f << "Name : " << getName() << ", "
+			<< "Path : " << getPathname() << ", "
+			<< "Latitude : " << getLatitude() << ", "
+			<< "Longitude : " << getLongitude() << std::endl;
+		};
+		
 	void playMedia() const override {
 		string cmd = "imagej " + this->getPathname() + "&";
 		system(cmd.c_str());
