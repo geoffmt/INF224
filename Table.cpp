@@ -6,7 +6,12 @@
 //  Copyright © 2020 Geoff. All rights reserved.
 //
 
+#include <iostream>
+#include <sstream>
+#include <exception>
 #include "Table.hpp"
+using namespace cppu;
+using namespace std;
 
 
 /*
@@ -37,3 +42,90 @@ void Table::remove(std::string name){
 	}
 	
 }
+
+/* Cette méthode est appelée chaque fois qu'il y a une requête à traiter.
+ * Ca doit etre une methode de la classe qui gere les données, afin qu'elle
+ * puisse y accéder.
+ *
+ * Arguments:
+ * - 'request' contient la requête
+ * - 'response' sert à indiquer la réponse qui sera renvoyée au client
+ * - si la fonction renvoie false la connexion est close.
+ *
+ * Cette fonction peut etre appelée en parallele par plusieurs threads (il y a
+ * un thread par client).
+ *
+ * Pour eviter les problemes de concurrence on peut créer un verrou en creant
+ * une variable Lock **dans la pile** qui doit etre en mode WRITE (2e argument = true)
+ * si la fonction modifie les donnees.*/
+bool Table::processRequest(TCPConnection &cnx, const string &request, string &response){
+	
+	cerr << "\nRequest: '" << request << "'" << endl;
+	
+	/*
+	 Parsing the request
+	 */
+	
+	std::string action, name;
+	std::stringstream str;
+	str << request; //insertion de la requête
+	str >> action; //on extrait jusqu'au premier espace l'action
+	str >> name;
+	
+	
+	/*
+	 Traitement
+	 */
+	
+	bool searched, played;
+	searched = false;
+	played = false;
+	
+	stringbuf buffer = stringbuf();
+	ostream os(&buffer);
+	
+	GroupPtr group;
+	
+	if (action == "search")
+	{
+		TCPLock lock(cnx);
+		
+		try {
+			group = findGroup(name);
+		} catch (out_of_range const& e){
+		}
+		if (!group.get())
+		{
+			try{
+				MultimediaPtr media = findMultimedia(name);
+			} catch(out_of_range const& e){
+				
+			}
+			displayMultimedia(name, os);
+			
+		}
+		else {displayGroup(name, os);}
+		
+		response = buffer.str();
+		return true;
+	}
+	if (action == "play")
+	{
+		TCPLock lock(cnx);
+		
+		MultimediaPtr media;
+		media = findMultimedia(name);
+		media->playMedia();
+		
+		response = "Playing " + name + " on server";
+		return true;
+	}
+	
+	
+	response = "OK: " + request;
+	cerr << "response: " << response << endl;
+	
+	// renvoyer false si on veut clore la connexion avec le client
+	return true;
+}
+

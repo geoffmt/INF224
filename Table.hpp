@@ -14,11 +14,17 @@
 #include "Picture.hpp"
 #include "Film.hpp"
 #include "Group.hpp"
+#include "tcpserver.h"
+#include "cppsocket.h"
 
-#include <stdio.h>
 #include <map>
 #include <memory>
 #include <string>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+using namespace cppu;
 
 typedef std::shared_ptr<Multimedia> MultimediaPtr;
 typedef std::shared_ptr<Picture> PicturePtr;
@@ -33,7 +39,7 @@ private:
 	std::map<std::string, GroupPtr> groupMap;
 	
 public:
-	Table();
+	Table(){};
 	~Table(){
 		std::cout << "Table  deleted" << std::endl;
 	};
@@ -83,5 +89,7 @@ public:
 	}
 	
 	void remove(std::string name);
+	
+	bool processRequest(TCPConnection& cnx, const string& request, string& response);
 };
 #endif /* Table_hpp */

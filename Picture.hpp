@@ -44,7 +44,7 @@ public:
 		};
 		
 	void playMedia() const override {
-		string cmd = "imagej " + this->getPathname() + "&";
+		string cmd = "open " + this->getPathname() + "&";
 		system(cmd.c_str());
 	};
 	

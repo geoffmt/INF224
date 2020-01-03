@@ -4,42 +4,73 @@
 //
 
 
+#include <memory>
+#include <string>
 #include <iostream>
-using namespace std;
+#include <sstream>
 
-#include "Multimedia.hpp"
-#include "Video.hpp"
-#include "Picture.hpp"
-#include "Film.hpp"
-#include "Group.hpp"
-#include "Table.cpp"
+
+
+#include "Table.hpp"
+
+const int PORT = 3331;
 
 
 int main(int argc, const char* argv[])
 {
+	
+	
 	/** Test du displayMultimedia
 	 Multimedia * multimedia = new Multimedia("welcome","tetech");
 	 multimedia->displayMultimedia(cout);
 	 */
 	
-	Picture * picture = new Picture("test_photo.jpg","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_photo.jpg",640,545);
-		
-	Video * video = new Video("movie","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video.m4v",100);
-	
-
-	Video * video2 = new Video("movie2","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video2.m4v",10);
-		
+	/**
+	 Picture * picture = new Picture("test_photo.jpg","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_photo.jpg",640,545);
+		 
+	 Video * video = new Video("movie","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video.m4v",100);
 	 
+
+	 Video * video2 = new Video("movie2","/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video2.m4v",10);
+		 
+	  
+	 
+	 Multimedia ** multimedias = new Multimedia * [3];
+	 multimedias[0] = video;
+	 multimedias[1] = picture;
+	 multimedias[2] = video2;
+	 
+	 for (int i=0;i<3;i++){
+		 multimedias[i]->playMedia(); //polymorhpisme (a vérifier)
+	 }
+	 
+	 */
+
+	// cree le TCPServer
+	shared_ptr<TCPServer> server(new TCPServer());
 	
-	Multimedia ** multimedias = new Multimedia * [3];
-	multimedias[0] = video;
-	multimedias[1] = picture;
-	multimedias[2] = video2;
+	// cree l'objet qui gère les données
+	shared_ptr<Table> table(new Table());
+	table->createPicture("dog", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_photo.jpg", 640,545);
+	table->createVideo("sample_video", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video.m4v", 100);
+	// le serveur appelera cette méthode chaque fois qu'il y a une requête
+	server->setCallback(*table, &Table::processRequest);
 	
-	for (int i=0;i<3;i++){
-		multimedias[i]->playMedia(); //polymorhpisme (a vérifier)
+	// lance la boucle infinie du serveur
+	cout << "Starting Server on port " << PORT << endl;
+	int status = server->run(PORT);
+	
+	// en cas d'erreur
+	if (status < 0) {
+		cerr << "Could not start Server on port " << PORT << endl;
+		return 1;
 	}
 	
+	return 0;
+
+
+
+
 	
 	
 }
