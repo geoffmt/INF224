@@ -32,7 +32,7 @@ CXX = c++
 #   -std=c++11 pour C++11
 # Exemple: CXXFLAGS= -std=c++11 -Wall -O -I/usr/local/qt/include
 #
-CXXFLAGS = -std=c++11 -Wall -g
+CXXFLAGS = -std=c++11 -Wall -g -I/usr/local/opt/nlohmann_json/include
 
 #
 # Options de l'editeur de liens

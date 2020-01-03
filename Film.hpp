@@ -54,6 +54,10 @@ public:
 		std::cout << "Film " << getName() << " deleted\n\n";
 	}
 	
+	string getClassName() const override{
+		return "Film";
+	};
+	
 	const int * getChapterLengths() const {
 		return chapterLengths;
 	}

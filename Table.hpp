@@ -20,8 +20,10 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <iostream>
 #include <sstream>
+#include <iostream>
+#include <fstream>
+
 
 using namespace std;
 using namespace cppu;
@@ -32,17 +34,24 @@ typedef std::shared_ptr<Video> VideoPtr;
 typedef std::shared_ptr<Film> FilmPtr;
 typedef std::shared_ptr<Group> GroupPtr;
 
-class Table{
+#include "json.hpp"
+
+using json = nlohmann::json;
+
+class Table {
 	
 private:
 	std::map<std::string, MultimediaPtr> multimediaMap;
 	std::map<std::string, GroupPtr> groupMap;
+	json j;
 	
 public:
 	Table(){};
 	~Table(){
 		std::cout << "Table  deleted" << std::endl;
 	};
+	
+
 	
 	PicturePtr createPicture(string name, string pathname, float latitude, float longitude){
 		PicturePtr p = (PicturePtr) new Picture(name, pathname, latitude, longitude);
@@ -91,5 +100,39 @@ public:
 	void remove(std::string name);
 	
 	bool processRequest(TCPConnection& cnx, const string& request, string& response);
+	
+
+	void serialize(){
+		for (auto& i : multimediaMap){
+			MultimediaPtr media = i.second;
+			if(media->getClassName() == "Picture"){
+				PicturePtr myPic = dynamic_pointer_cast<Picture>(media);
+				j[myPic->getClassName()][myPic->getName()] = {myPic->getPathname(), myPic->getLatitude(),myPic->getLongitude()};
+			}
+			if(media->getClassName() == "Video"){
+				VideoPtr myVid = dynamic_pointer_cast<Video>(media);
+				j[myVid->getClassName()][myVid->getName()] = {myVid->getPathname(), myVid->getLength()};
+			}
+			if(media->getClassName() == "Film"){
+				FilmPtr myFilm = dynamic_pointer_cast<Film>(media);
+				j["Video"][myFilm->getClassName()][myFilm->getName()] = {myFilm->getPathname(),myFilm->getNumberOfChapters(), *myFilm->getChapterLengths()};
+			}
+		}
+	};
+	
+	void saveSerialtoFile(){
+		std::ofstream file("/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/mySerialFile.json");
+		file << j;
+		file.close();
+	};
+	
+	void readSerialFile(){
+		std::ifstream loadedSerial("/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/mySerialFile.json",std::ifstream::in);
+		cout << loadedSerial.rdbuf();
+		
+	};
+	
 };
+
+
 #endif /* Table_hpp */

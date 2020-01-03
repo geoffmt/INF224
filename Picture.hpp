@@ -32,6 +32,9 @@ public:
 	
 	float getLatitude() const {return latitude;};
 	float getLongitude() const {return longitude;};
+	string getClassName() const override {
+		return "Picture";
+	};
 	
 	void setLatitude(int newLatitude){this->latitude = newLatitude;};
 	void setLongitude(int newLongitude){this->longitude = newLongitude;};

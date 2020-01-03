@@ -28,6 +28,9 @@ public:
 	
 	
 	int getLength() const {return length;};
+	virtual string getClassName() const override{
+		return "Video";
+	};
 	
 	void setLength(int newLength){this->length = newLength;};
 	

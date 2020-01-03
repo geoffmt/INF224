@@ -45,7 +45,6 @@ int main(int argc, const char* argv[])
 	 }
 	 
 	 */
-
 	// cree le TCPServer
 	shared_ptr<TCPServer> server(new TCPServer());
 	
@@ -53,6 +52,9 @@ int main(int argc, const char* argv[])
 	shared_ptr<Table> table(new Table());
 	table->createPicture("dog", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_photo.jpg", 640,545);
 	table->createVideo("sample_video", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video.m4v", 100);
+	table->serialize();
+	table->saveSerialtoFile();
+	table->readSerialFile();
 	// le serveur appelera cette méthode chaque fois qu'il y a une requête
 	server->setCallback(*table, &Table::processRequest);
 	

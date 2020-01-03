@@ -30,6 +30,9 @@ public:
 	
 	string getName() const;
 	string getPathname() const;
+	virtual string getClassName() const {
+		return "Multimedia";
+	};
 	
 	void setType(string newName);
 	void setPathname(string newPathname);
