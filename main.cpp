@@ -12,6 +12,7 @@ using namespace std;
 #include "Picture.hpp"
 #include "Film.hpp"
 #include "Group.hpp"
+#include "Table.cpp"
 
 
 int main(int argc, const char* argv[])
