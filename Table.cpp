@@ -21,12 +21,26 @@ using namespace std;
  */
 void Table::remove(std::string name){
 	
+	try{
+		if (multimediaMap.count(name)>0){
+			throw "This unexisting group cannot be erased!";
+		}
+	} catch (const char* e) {
+		cerr << e << endl;
+	}
 	auto it_g = groupMap.find(name);
 	if (it_g != groupMap.end()) {
 		groupMap.erase(it_g);
 		return;
 	}
 	
+	try{
+		if (!multimediaMap.count(name)){
+			throw "This unexisting media cannot be erased!";
+		}
+	} catch (const char* e) {
+		cerr << e << endl;
+	}
 	auto it_m = multimediaMap.find(name);
 	if (it_m != multimediaMap.end()) {
 		for (auto& i : groupMap) {

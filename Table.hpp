@@ -54,24 +54,71 @@ public:
 
 	
 	PicturePtr createPicture(string name, string pathname, float latitude, float longitude){
+		try{
+			if (multimediaMap.count(name)>0){
+				throw "Picture with the same name already created!";
+			}
+			if (name.find("\n") != string::npos || name.find("\r") != string::npos){
+				throw "Name containing invalid caracters";
+			}
+		} catch (const char* e) {
+			cerr << e << endl;
+			return nullptr;
+		}
 		PicturePtr p = (PicturePtr) new Picture(name, pathname, latitude, longitude);
 		multimediaMap[name] = p;
 		return p;
 	};
 	
 	VideoPtr createVideo(string name, string pathname,int length){
+		try{
+			if (multimediaMap.count(name)>0){
+				throw "Video with the same name already created!";
+			}
+			if (name.find("\n") != string::npos || name.find("\r") != string::npos){
+				throw "Name containing invalid caracters";
+			}
+		} catch (const char* e) {
+			cerr << e << endl;
+			return nullptr;
+		}
 		VideoPtr v = (VideoPtr) new Video(name, pathname, length);
 		multimediaMap[name] = v;
 		return v;
 	};
 	
 	FilmPtr createFilm(string name, string pathname,int length, int numberOfChapters, int * chapterLengths){
+		try{
+			if (multimediaMap.count(name)>0){
+				throw "Film with the same name already created!";
+			}
+			if (name.find("\n") != string::npos || name.find("\r") != string::npos){
+				throw "Name containing invalid caracters";
+			}
+			if (length <= 0){
+				throw "Film's length is invalid";
+			}
+		} catch (const char* e) {
+			cerr << e << endl;
+			return nullptr;
+		}
 		FilmPtr f = (FilmPtr) new Film(name, pathname, length, numberOfChapters, chapterLengths);
 		multimediaMap[name] = f;
 		return f;
 	};
 	
 	GroupPtr createGroupe(std::string groupName){
+		try{
+			if (multimediaMap.count(groupName)>0){
+				throw "Group with the same name already created!";
+			}
+			if (groupName.find("\n") != string::npos || groupName.find("\r") != string::npos){
+				throw "Name containing invalid caracters";
+			}
+		} catch (const char* e) {
+			cerr << e << endl;
+			return nullptr;
+		}
 		GroupPtr g = (GroupPtr) new Group(groupName);
 		groupMap[groupName] = g;
 		return g;
