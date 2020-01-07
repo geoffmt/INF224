@@ -23,5 +23,5 @@ void Multimedia::setPathname(string newPathname){pathname = newPathname;};
 
 void Multimedia::displayMedia (std::ostream & f) const {
 	f << "Name : " << getName() << ", "
-	<< "Path : " << getPathname() << std::endl;
+	<< "Path : " << getPathname();
 };

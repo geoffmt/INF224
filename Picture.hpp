@@ -43,7 +43,7 @@ public:
 			f << "Name : " << getName() << ", "
 			<< "Path : " << getPathname() << ", "
 			<< "Latitude : " << getLatitude() << ", "
-			<< "Longitude : " << getLongitude() << std::endl;
+			<< "Longitude : " << getLongitude();
 		};
 		
 	void playMedia() const override {

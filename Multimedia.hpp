@@ -45,7 +45,7 @@ public:
 	/*
 	 Joue le média
 	 */
-	virtual void playMedia() const {}
+	virtual void playMedia() const = 0;
 	
 };
 #endif /* Multimedia_hpp */

@@ -81,10 +81,11 @@ bool Table::processRequest(TCPConnection &cnx, const string &request, string &re
 	 */
 	
 	std::string action, name;
-	std::stringstream str;
-	str << request; //insertion de la requête
+	std::stringstream str = std::stringstream(request);
+	 //insertion de la requête
 	str >> action; //on extrait jusqu'au premier espace l'action
 	str >> name;
+	
 	
 	
 	/*

@@ -75,10 +75,10 @@ public:
 		f << "Name : " << getName() << ", "
 		<< "Path : " << getPathname() << ", "
 		<< "Length : " << getLength() << ", "
-		<< "Number of chapters : " << getNumberOfChapters() << std::endl;
+		<< "Number of chapters : " << getNumberOfChapters();
 		f << "Chapters" << std::endl;
 		for (int i=0; i<numberOfChapters; i++) {
-			f << "Chapter " << i << " : " << chapterLengths[i] << std::endl;
+			f << "Chapter " << i << " : " << chapterLengths[i];
 			
 		}
 	}

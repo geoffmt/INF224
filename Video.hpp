@@ -37,7 +37,7 @@ public:
 	virtual void displayMedia(std::ostream& f) const override {
 		f << "Name : " << getName() << ", "
 		<< "Path : " << getPathname() << ", "
-		<< "Length : " << getLength() << ", " << std::endl;
+		<< "Length : " << getLength() << ", ";
 	};
 
 	virtual void playMedia() const override {

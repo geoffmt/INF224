@@ -10,7 +10,7 @@ public class Client
 {
     private static final long serialVersionUID = 1L;
     static final String DEFAULT_HOST = "localhost";
-    static final int DEFAULT_PORT = 3331;
+    static final int DEFAULT_PORT = 3332;
     private Socket sock;
     private BufferedReader input;
     private BufferedWriter output;

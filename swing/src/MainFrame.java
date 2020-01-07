@@ -12,7 +12,7 @@ public class MainFrame extends JFrame {
     private JButton displayButton ;
     private JButton playButton;
     private JButton quitButton ;
-    private TextArea textArea = new TextArea(20,20);
+    private TextArea textArea = new TextArea(40,150);
 
 
     private static Client client;
@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
     public static void main(String argv[]) {
 
         try {
-            client = new Client("localhost", 3331);
+            client = new Client("localhost", Client.DEFAULT_PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,6 +101,7 @@ public class MainFrame extends JFrame {
             if (name != null){
                 String message = "search " + name;
                 String response = client.send(message);
+                System.out.println(response);
                 textArea.append(response + '\n');
             }
             else{
