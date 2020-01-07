@@ -32,12 +32,12 @@ CXX = c++
 #   -std=c++11 pour C++11
 # Exemple: CXXFLAGS= -std=c++11 -Wall -O -I/usr/local/qt/include
 #
-CXXFLAGS = -std=c++11 -Wall -g -I/usr/local/opt/nlohmann_json/include
+CXXFLAGS = -std=c++11 -Wall -g
 
 #
 # Options de l'editeur de liens
 #
-LDFLAGS = 
+LDFLAGS =
 
 #
 # Librairies a utiliser
@@ -51,7 +51,7 @@ LDLIBS = -lpthread
 # Regles de construction/destruction des .o et de l'executable
 # depend-${PROG} sera un fichier contenant les dependances
 #
- 
+
 all: ${PROG}
 
 run: ${PROG}
@@ -65,11 +65,11 @@ clean:
 
 clean-all: clean
 	-@$(RM) ${PROG} 1>/dev/null 2>&1
-  
+
 tar:
 	tar cvf ${PROG}.tar.gz ${SOURCES}
 
-# Gestion des dependances : creation automatique des dependances en utilisant 
+# Gestion des dependances : creation automatique des dependances en utilisant
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
 #
 depend-${PROG}:

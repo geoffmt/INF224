@@ -12,7 +12,7 @@ public class MainFrame extends JFrame {
     private JButton displayButton ;
     private JButton playButton;
     private JButton quitButton ;
-    private TextArea textArea = new TextArea(40,150);
+    private TextArea textArea = new TextArea(35,130);
 
 
     private static Client client;
@@ -101,7 +101,6 @@ public class MainFrame extends JFrame {
             if (name != null){
                 String message = "search " + name;
                 String response = client.send(message);
-                System.out.println(response);
                 textArea.append(response + '\n');
             }
             else{
@@ -143,5 +142,3 @@ public class MainFrame extends JFrame {
     }
 
 }
-
-

@@ -92,9 +92,6 @@ bool Table::processRequest(TCPConnection &cnx, const string &request, string &re
 	 Traitement
 	 */
 	
-	bool searched, played;
-	searched = false;
-	played = false;
 	
 	stringbuf buffer = stringbuf();
 	ostream os(&buffer);

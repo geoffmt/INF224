@@ -50,8 +50,8 @@ int main(int argc, const char* argv[])
 	
 	// cree l'objet qui gère les données
 	shared_ptr<Table> table(new Table());
-	table->createPicture("dog", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_photo.jpg", 640,545);
-	table->createVideo("sample_video", "/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/test_video.m4v", 100);
+	table->createPicture("dog", "/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/test_photo.jpg", 640,545);
+	table->createVideo("sample_video", "/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/test_video.m4v", 100);
 	table->serialize();
 	table->saveSerialtoFile();
 	//table->readSerialFile();

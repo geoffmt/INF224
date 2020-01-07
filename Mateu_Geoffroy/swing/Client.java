@@ -48,7 +48,7 @@ public class Client
             try {
                 String request = cin.readLine();
                 String response = client.send(request);
-                System.out.println("Response: " + response);
+                System.out.println("Response: "+ response);
             }
             catch (java.io.IOException e) {
                 System.err.println("Client: IO error");
@@ -114,4 +114,3 @@ public class Client
         }
     }
 }
-

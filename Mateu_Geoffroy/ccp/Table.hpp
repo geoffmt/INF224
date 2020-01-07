@@ -168,13 +168,13 @@ public:
 	};
 	
 	void saveSerialtoFile(){
-		std::ofstream file("/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/mySerialFile.json");
+		std::ofstream file("/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/mySerialFile.json");
 		file << j;
 		file.close();
 	};
 	
 	void readSerialFile(){
-		std::ifstream loadedSerial("/Users/geoffhome/Documents/TPT/2A/inf224/ProjetINF224/ProjetINF224/mySerialFile.json",std::ifstream::in);
+		std::ifstream loadedSerial("/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/mySerialFile.json",std::ifstream::in);
 		cout << loadedSerial.rdbuf();
 		
 	};
