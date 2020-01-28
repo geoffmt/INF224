@@ -12,7 +12,7 @@ public class MainFrame extends JFrame {
     private JButton displayButton ;
     private JButton playButton;
     private JButton quitButton ;
-    private TextArea textArea = new TextArea(35,130);
+    private JTextArea textArea = new JTextArea(35,130);
 
 
     private static Client client;
@@ -44,7 +44,7 @@ public class MainFrame extends JFrame {
 
     private void initPanel(){
 
-        JPanel jPanel = new JPanel();
+        JPanel buttonsPanel = new JPanel();
 
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -55,13 +55,13 @@ public class MainFrame extends JFrame {
         quitButton = new JButton(new QuitAction("Quit"));
 
 
-        jPanel.add(displayButton);
-        jPanel.add(playButton);
-        jPanel.add(quitButton);
+        buttonsPanel.add(displayButton);
+        buttonsPanel.add(playButton);
+        buttonsPanel.add(quitButton);
 
         textArea.setBackground(Color.WHITE);
         add(scrollPane, BorderLayout.CENTER);
-        add(jPanel, BorderLayout.SOUTH);
+        add(buttonsPanel, BorderLayout.SOUTH);
 
     }
 
@@ -90,8 +90,8 @@ public class MainFrame extends JFrame {
     }
 
     class DisplayAction extends AbstractAction {
-        Frame parentFrame;
-        public DisplayAction(String text, Frame frame) {
+        JFrame parentFrame;
+        public DisplayAction(String text, JFrame frame) {
             super(text);
             parentFrame = frame;
         }
@@ -102,6 +102,7 @@ public class MainFrame extends JFrame {
                 String message = "search " + name;
                 String response = client.send(message);
                 textArea.append(response + '\n');
+            
             }
             else{
                 return;

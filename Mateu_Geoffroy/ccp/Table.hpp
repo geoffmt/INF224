@@ -133,6 +133,7 @@ public:
 	}
 	
 	void displayMultimedia(std::string name, std::ostream& f) const {
+		
 		multimediaMap.find(name)->second->displayMedia(f);
 	}
 	

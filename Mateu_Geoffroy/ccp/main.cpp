@@ -13,7 +13,7 @@
 
 #include "Table.hpp"
 
-const int PORT = 3332;
+const int PORT = 3333;
 
 
 int main(int argc, const char* argv[])

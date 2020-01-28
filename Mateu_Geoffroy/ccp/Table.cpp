@@ -72,7 +72,8 @@ void Table::remove(std::string name){
  * Pour eviter les problemes de concurrence on peut créer un verrou en creant
  * une variable Lock **dans la pile** qui doit etre en mode WRITE (2e argument = true)
  * si la fonction modifie les donnees.*/
-bool Table::processRequest(TCPConnection &cnx, const string &request, string &response){
+bool Table::processRequest(TCPConnection &cnx, const string &request, 
+string &response){
 	
 	cerr << "\nRequest: '" << request << "'" << endl;
 	
@@ -95,7 +96,7 @@ bool Table::processRequest(TCPConnection &cnx, const string &request, string &re
 	
 	stringbuf buffer = stringbuf();
 	ostream os(&buffer);
-	
+
 	GroupPtr group;
 	
 	if (action == "search")
@@ -105,13 +106,15 @@ bool Table::processRequest(TCPConnection &cnx, const string &request, string &re
 		try {
 			group = findGroup(name);
 		} catch (out_of_range const& e){
+
 		}
-		if (!group.get())
+		if (!group.get()) //à inverser 
 		{
 			try{
 				MultimediaPtr media = findMultimedia(name);
 			} catch(out_of_range const& e){
-				
+				response = "pas trouvé";
+				return true;
 			}
 			displayMultimedia(name, os);
 			
