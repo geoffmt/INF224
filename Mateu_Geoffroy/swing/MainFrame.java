@@ -30,6 +30,10 @@ public class MainFrame extends JFrame {
         new MainFrame();
     }
 
+/**
+         * Conteneur principal
+         * 
+         */
     public MainFrame(){
 
         initPanel();
@@ -42,6 +46,10 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+/**
+         * Conteneur de la zone de texte et des boutons
+         * 
+         */
     private void initPanel(){
 
         JPanel buttonsPanel = new JPanel();
@@ -65,6 +73,10 @@ public class MainFrame extends JFrame {
 
     }
 
+/**
+         * Conteneur des items de la barre des tâches
+         * 
+         */
     private void initMenuBar(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -81,6 +93,10 @@ public class MainFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 
+/**
+         * Initie la bar des tâches
+         * 
+         */
     private void initToolBar(){
         JToolBar toolBar = new JToolBar();
         toolBar.add(new DisplayAction("Display",this));
@@ -89,6 +105,10 @@ public class MainFrame extends JFrame {
         add(toolBar, BorderLayout.NORTH);
     }
 
+/**
+         * Action effectuée lorsque l'on appuie sur display
+         * 
+         */
     class DisplayAction extends AbstractAction {
         JFrame parentFrame;
         public DisplayAction(String text, JFrame frame) {
@@ -110,6 +130,10 @@ public class MainFrame extends JFrame {
         }
     }
 
+/**
+         * Action effectuée lorsque l'on appuie sur play
+         * 
+         */
     class PlayAction extends AbstractAction {
         Frame parentFrame;
         public PlayAction(String text, Frame frame) {
@@ -131,6 +155,10 @@ public class MainFrame extends JFrame {
         }
     }
 
+/**
+         * Action effectuée lorsque l'on appuie sur quit
+         * 
+         */
     class QuitAction extends AbstractAction{
 
         public QuitAction(String text) {

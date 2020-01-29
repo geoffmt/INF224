@@ -17,11 +17,13 @@ public class Client
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    ///
-    /// Lit une requete depuis le Terminal, envoie cette requete au serveur,
-    /// recupere sa reponse et l'affiche sur le Terminal.
-    /// Noter que le programme bloque si le serveur ne repond pas.
-    ///
+
+    /**
+         * Lit une requete depuis le Terminal, envoie cette requete au serveur,
+         * recupere sa reponse et l'affiche sur le Terminal.
+         * Noter que le programme bloque si le serveur ne repond pas.
+         * 
+         */
     public static void main(String argv[]) {
         String host = DEFAULT_HOST;
         int port = DEFAULT_PORT;
@@ -58,11 +60,11 @@ public class Client
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ///
-    /// Initialise la connexion.
-    /// Renvoie une exception en cas d'erreur.
-    ///
+    /**
+         * Initialise la connexion.
+         * Renvoie une exception en cas d'erreur.
+         * 
+         */
     public Client(String host, int port) throws UnknownHostException, IOException {
         try {
             sock = new java.net.Socket(host, port);
@@ -87,11 +89,11 @@ public class Client
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ///
-    /// Envoie une requete au server et retourne sa reponse.
-    /// Noter que la methode bloque si le serveur ne repond pas.
-    ///
+    /**
+         * Envoie une requete au server et retourne sa reponse.
+         * Noter que la methode bloque si le serveur ne repond pas.
+         * 
+         */
     public String send(String request) {
         // Envoyer la requete au serveur
         try {
