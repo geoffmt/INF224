@@ -55,14 +55,15 @@ int main(int argc, const char* argv[])
 	table->serialize();
 	table->saveSerialtoFile();
 	//table->readSerialFile();
-	// le serveur appelera cette méthode chaque fois qu'il y a une requête
+
+    // le serveur appelera cette méthode chaque fois qu'il y a une requête
 	server->setCallback(*table, &Table::processRequest);
 	
 	// lance la boucle infinie du serveur
 	cout << "Starting Server on port " << PORT << endl;
 	int status = server->run(PORT);
 	
-	// en cas d'erreur
+    // en cas d'erreur
 	if (status < 0) {
 		cerr << "Could not start Server on port " << PORT << endl;
 		return 1;

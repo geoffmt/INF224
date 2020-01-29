@@ -4,6 +4,12 @@
 //  http://www.telecom-paristech.fr/~elc
 //
 
+/**
+ * \file tcpserver.hpp
+ * \brief Objet qui contient le serveur
+ *
+ */
+
 #ifndef __tcpserver__
 #define __tcpserver__
 #include <memory>

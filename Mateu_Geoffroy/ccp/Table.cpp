@@ -57,21 +57,7 @@ void Table::remove(std::string name){
 	
 }
 
-/* Cette méthode est appelée chaque fois qu'il y a une requête à traiter.
- * Ca doit etre une methode de la classe qui gere les données, afin qu'elle
- * puisse y accéder.
- *
- * Arguments:
- * - 'request' contient la requête
- * - 'response' sert à indiquer la réponse qui sera renvoyée au client
- * - si la fonction renvoie false la connexion est close.
- *
- * Cette fonction peut etre appelée en parallele par plusieurs threads (il y a
- * un thread par client).
- *
- * Pour eviter les problemes de concurrence on peut créer un verrou en creant
- * une variable Lock **dans la pile** qui doit etre en mode WRITE (2e argument = true)
- * si la fonction modifie les donnees.*/
+
 bool Table::processRequest(TCPConnection &cnx, const string &request, 
 string &response){
 	
@@ -108,12 +94,12 @@ string &response){
 		} catch (out_of_range const& e){
 
 		}
-		if (!group.get()) //à inverser 
+        if (!group.get())
 		{
 			try{
 				MultimediaPtr media = findMultimedia(name);
 			} catch(out_of_range const& e){
-				response = "pas trouvé";
+                response = "L'élément que vous cherchez n'est pas dans la base de donnée";
 				return true;
 			}
 			displayMultimedia(name, os);
