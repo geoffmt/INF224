@@ -1,10 +1,8 @@
-//
-//  Film.hpp
-//  Projet - INF224
-//
-//  Created by Geoff on 03/12/2019.
-//  Copyright © 2019 Geoff. All rights reserved.
-//
+/**
+ * \file Film.hpp
+ * \brief Objet qui contient un film
+ *
+ */
 
 #ifndef Film_hpp
 #define Film_hpp
@@ -25,7 +23,7 @@ private:
 	  Video::setLength(length);
 	}
 
-	void copyLengths(const int * chapterLengths, int numberOfChapters) {
+    void copyLengths(const int * chapterLengths, int numberOfChapters) {
 	  if (!chapterLengths) {
 		this->chapterLengths = nullptr;
 		setLength(0);
@@ -56,7 +54,7 @@ public:
 	
 	string getClassName() const override{
 		return "Film";
-	};
+    }
 	
 	const int * getChapterLengths() const {
 		return chapterLengths;
@@ -66,11 +64,14 @@ public:
 		return numberOfChapters;
 	}
 	
-	//Setters
 	void setLengths(int numberOfChapters, int * lengths) {
 		copyLengths(lengths, numberOfChapters);
 	}
 	
+    /**
+     * @brief Affiche les attributs d'un film avec son nom, path, taille, nombre de chapitres ainsi que leurs noms
+     * @param f : le buffer vers lequel on envoie les données
+     */
 	void displayMedia(std::ostream& f) const override {
 		f << "Name : " << getName() << ", "
 		<< "Path : " << getPathname() << ", "

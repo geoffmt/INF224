@@ -1,11 +1,8 @@
-//
-//  Multimedia.hpp
-//  Projet - INF224
-//
-//  Created by Geoff on 26/11/2019.
-//  Copyright © 2019 Geoff. All rights reserved.
-//
-
+/**
+ * \file Multimedia.hpp
+ * \brief Objet qui contient un média
+ *
+ */
 
 #ifndef Multimedia_hpp
 #define Multimedia_hpp
@@ -37,14 +34,16 @@ public:
 	void setType(string newName);
 	void setPathname(string newPathname);
 	
-	/*
-	 Affiche les attributs du média
-	 */
+    /**
+     * @brief Affiche les attributs d'un média
+     * @param f : le buffer vers lequel on envoie les données
+     */
 	virtual void displayMedia (std::ostream&) const;
 	
-	/*
-	 Joue le média
-	 */
+    /**
+     * @brief Joue le média
+
+     */
 	virtual void playMedia() const = 0;
 	
 };

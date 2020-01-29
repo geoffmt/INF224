@@ -27,6 +27,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/**
+ * \file json.hpp
+ * \brief Objet qui contient un ce dont on a besoin pour l'utilisation des json dans le cadre de la sérialisation
+ *
+ */
+
 #ifndef INCLUDE_NLOHMANN_JSON_HPP_
 #define INCLUDE_NLOHMANN_JSON_HPP_
 

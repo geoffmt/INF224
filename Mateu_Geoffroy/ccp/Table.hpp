@@ -1,10 +1,8 @@
-//
-//  Table.hpp
-//  Projet - INF224
-//
-//  Created by Geoff on 03/01/2020.
-//  Copyright © 2020 Geoff. All rights reserved.
-//
+/**
+ * \file Table.hpp
+ * \brief Objet qui contient une map
+ *
+ */
 
 #ifndef Table_hpp
 #define Table_hpp
@@ -39,20 +37,27 @@ typedef std::shared_ptr<Group> GroupPtr;
 using json = nlohmann::json;
 
 class Table {
-	
+
 private:
 	std::map<std::string, MultimediaPtr> multimediaMap;
 	std::map<std::string, GroupPtr> groupMap;
 	json j;
-	
-public:
-	Table(){};
-	~Table(){
-		std::cout << "Table  deleted" << std::endl;
-	};
-	
 
-	
+public:
+    Table(){}
+		~Table(){
+		std::cout << "Table  deleted" << std::endl;
+    }
+
+
+    /**
+     * @brief Crée un objet image avec ses attributs
+     * @param name
+     * @param pathname
+     * @param latitude
+     * @param longitude
+     * @return Renvoie un pointeur d'image vers ce nouvel objet
+     */
 	PicturePtr createPicture(string name, string pathname, float latitude, float longitude){
 		try{
 			if (multimediaMap.count(name)>0){
@@ -68,8 +73,15 @@ public:
 		PicturePtr p = (PicturePtr) new Picture(name, pathname, latitude, longitude);
 		multimediaMap[name] = p;
 		return p;
-	};
-	
+    }
+
+    /**
+     * @brief Crée un objet vidéo avec ses attributs
+     * @param name
+     * @param pathname
+     * @param length
+     * @return Renvoie un pointeur de vidéo vers ce nouvel objet
+     */
 	VideoPtr createVideo(string name, string pathname,int length){
 		try{
 			if (multimediaMap.count(name)>0){
@@ -85,8 +97,17 @@ public:
 		VideoPtr v = (VideoPtr) new Video(name, pathname, length);
 		multimediaMap[name] = v;
 		return v;
-	};
-	
+    }
+
+    /**
+     * @brief Crée un objet film avec ses attributs
+     * @param name
+     * @param pathname
+     * @param length
+     * @param numberOfChapters
+     * @param chapterLengths
+     * @return Renvoie un pointeur de film vers ce nouvel objet
+     */
 	FilmPtr createFilm(string name, string pathname,int length, int numberOfChapters, int * chapterLengths){
 		try{
 			if (multimediaMap.count(name)>0){
@@ -105,8 +126,13 @@ public:
 		FilmPtr f = (FilmPtr) new Film(name, pathname, length, numberOfChapters, chapterLengths);
 		multimediaMap[name] = f;
 		return f;
-	};
-	
+    }
+
+    /**
+     * @brief Crée un objet groupe
+     * @param groupName
+     * @return Renvoie un pointeur de groupe vers ce nouvel objet
+     */
 	GroupPtr createGroupe(std::string groupName){
 		try{
 			if (multimediaMap.count(groupName)>0){
@@ -123,32 +149,42 @@ public:
 		groupMap[groupName] = g;
 		return g;
 	}
-	
+
 	MultimediaPtr findMultimedia(std::string name){
 		return multimediaMap.at(name);
 	}
-	
+
 	GroupPtr findGroup(std::string groupName){
 		return groupMap.at(groupName);
 	}
-	
+
 	void displayMultimedia(std::string name, std::ostream& f) const {
+
 		multimediaMap.find(name)->second->displayMedia(f);
 	}
-	
+
 	void displayGroup(std::string name, std::ostream& f) const {
 		groupMap.find(name)->second->displayMedia(f);
 	}
-	
+
 	void play(std::string name) const {
 		multimediaMap.find(name)->second->playMedia();
 	}
-	
-	void remove(std::string name);
-	
-	bool processRequest(TCPConnection& cnx, const string& request, string& response);
-	
 
+	void remove(std::string name);
+
+    /**
+     * @brief Cette méthode est appelée chaque fois qu'il y a une requête à traiter.
+     * @param cnx : connexion tcp
+     * @param request contient la requête
+     * @param response sert à indiquer la réponse qui sera renvoyée au client
+     * @return false : connexion close
+     */
+	bool processRequest(TCPConnection& cnx, const string& request, string& response);
+
+    /**
+     * @brief Permet la sérialisation des données dans un fichier de type json
+     */
 	void serialize(){
 		for (auto& i : multimediaMap){
 			MultimediaPtr media = i.second;
@@ -165,20 +201,26 @@ public:
 				j["Video"][myFilm->getClassName()][myFilm->getName()] = {myFilm->getPathname(),myFilm->getNumberOfChapters(), *myFilm->getChapterLengths()};
 			}
 		}
-	};
-	
+    }
+
+    /**
+     * @brief Permet de sauver le fichier sérialisé dans un fichier .json
+     */
 	void saveSerialtoFile(){
 		std::ofstream file("/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/mySerialFile.json");
 		file << j;
 		file.close();
-	};
-	
+    }
+
+    /**
+     * @brief Permet de lire le fichier sérialisé dans un fichier .json
+     */
 	void readSerialFile(){
 		std::ifstream loadedSerial("/cal/homes/gmateu/inf224/Mateu_Geoffroy/ccp/mySerialFile.json",std::ifstream::in);
 		cout << loadedSerial.rdbuf();
-		
-	};
-	
+
+    }
+
 };
 
 
